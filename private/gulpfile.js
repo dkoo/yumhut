@@ -19,7 +19,7 @@ gulp.task('jshint', function() {
 gulp.task('sass', function() {
 	return gulp.src('../app/stylesheets/styles.scss')
 		.pipe(sass())
-		.pipe(gulp.dest('../'));
+		.pipe(gulp.dest('../dist/'));
 });
 
 /* watch files for changes and execute tasks */
