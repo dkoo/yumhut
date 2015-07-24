@@ -1,0 +1,10 @@
+{
+  "sourceMap": false,
+  "useIndex" : true,
+  "enableAutoprefixer": true,
+  "autoprefixerOptions": {
+      "browsers": ["> 1%, last 2 versions, Firefox ESR, Opera 12.1"],
+      "cascade": false
+  },
+  "indexFilePath" : "assets/stylesheets/main.scss"  
+}

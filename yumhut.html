@@ -1,0 +1,29 @@
+<head>
+	<title>yumhut</title>
+</head>
+
+<body>
+	<div class="container">
+		<header>
+			<h1>yumhut</h1>
+			<h2>where are the yums?</h2>
+			{{> add}}
+		</header>
+
+		<ul class="yums">
+			{{#each yums}}
+				{{> yum}}
+			{{/each}}
+		</ul>
+	</div>
+</body>
+
+<template name="yum">
+	<li>{{text}}</li>
+</template>
+
+<template name="add">
+	<form class="new-yum">
+		<input type="text" name="text" placeholder="Add a new Yum" />
+	</form>
+</template>
