@@ -18,7 +18,7 @@ gulp.task('jshint', function() {
 
 gulp.task('sass', function() {
 	return gulp.src('../app/stylesheets/styles.scss')
-		.pipe(sass())
+		.pipe(sass({outputStyle: 'compressed'}))
 		.pipe(gulp.dest('../dist/'));
 });
 
