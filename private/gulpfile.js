@@ -4,9 +4,6 @@ var gulp = require('gulp'),
 	jshint = require('gulp-jshint'),
 	sass = require('gulp-sass');
 
-/* default gulp task */
-gulp.task('default', ['watch']);
-
 /* lint js files */
 gulp.task('jshint', function() {
 	return gulp.src('../app/**/*.js')
@@ -15,7 +12,6 @@ gulp.task('jshint', function() {
 });
 
 /* compile .scss files to CSS */
-
 gulp.task('sass', function() {
 	return gulp.src('../app/stylesheets/styles.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
@@ -23,7 +19,9 @@ gulp.task('sass', function() {
 });
 
 /* watch files for changes and execute tasks */
-
 gulp.task('watch', function() {
-	gulp.watch('../**/*.scss', ['sass']);
+	gulp.watch('../**/*.scss', ['lint', 'sass']);
 });
+
+/* default gulp task */
+gulp.task('default', ['lint', 'sass', 'watch']);

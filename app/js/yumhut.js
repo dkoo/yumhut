@@ -3,15 +3,25 @@ Yums = new Mongo.Collection('yums');
 if (Meteor.isClient) {
   Template.body.helpers({
     yums: function() {
-      return Yums.find({}, {sort: {createdAt: -1}});
+      if ( Session.get('filtered') ) {
+        return Yums.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
+      } else {
+        return Yums.find({}, {sort: {createdAt: -1}});
+      }
+    },
+    filtered: function() {
+      return Session.get('filtered');
+    },
+    showCount: function() {
+      return Yums.find({checked: {$ne: true}}).count();
     }
   });
 
   Template.body.events({
-    'submit .new-yum': function (event) {
-      event.preventDefault();
+    'submit .new-yum': function(e) {
+      e.preventDefault();
 
-      var input = event.target.text.value;
+      var input = e.target.text.value;
 
       Yums.insert({
         text: input,
@@ -19,7 +29,21 @@ if (Meteor.isClient) {
       });
 
       // clear after submitting
-      event.target.text.value = '';
+      e.target.text.value = '';
+    },
+    'change .filter input': function(e) {
+      Session.set('filtered', e.target.checked);
+    }
+  });
+
+  Template.yum.events({
+    'click .toggle-checked': function() {
+      Yums.update(this._id, {
+        $set: {checked: !this.checked}
+      });
+    },
+    'click .delete': function() {
+      Yums.remove(this._id);
     }
   });
 }

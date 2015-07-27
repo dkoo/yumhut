@@ -7,8 +7,14 @@
 		<header>
 			<h1>yumhut</h1>
 			<h2>where are the yums?</h2>
+			<p>Showing {{showCount}} yums</p>
 			{{> add}}
 		</header>
+
+		<label class="filter">
+			<input type="checkbox" checked="{{filtered}}" />
+			Hide checked yums
+		</label>
 
 		<ul class="yums">
 			{{#each yums}}
@@ -19,7 +25,11 @@
 </body>
 
 <template name="yum">
-	<li>{{text}}</li>
+	<li class="{{#if checked}}checked{{/if}}">
+		<button class="delete">&times;</button>
+		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+		<span>{{text}}</span>
+	</li>
 </template>
 
 <template name="add">
