@@ -8,6 +8,9 @@
 			<h1>yumhut</h1>
 			<h2>where are the yums?</h2>
 
+			{{#if currentUser}}
+				logged in as 
+			{{/if}}
 			{{> loginButtons}}
 
 			{{#if currentUser}}
@@ -31,12 +34,12 @@
 
 <template name="yum">
 	<li>
-		<button class="delete">delete this yum</button>
 		<h1>
 			{{#if editing}}
 				<form class="edit-yum">
-					<input type="text" name="name" placeholder="{{name}}" />
+					<input type="text" name="name" placeholder="{{name}}" /> <button>save</button>
 				</form>
+				<button class="cancel" name="name">cancel</button>
 			{{else}}
 				{{name}} <button class="edit" name="name">edit</button>
 			{{/if}}
@@ -44,7 +47,7 @@
 		<h2>Categories TK</h2>
 		<p>Description TK, TK</p>
 		<p><em>&#8212;{{username}}</em></p>
-		{{> edit}}
+		<button class="delete">delete this yum</button>
 	</li>
 </template>
 
@@ -52,8 +55,4 @@
 	<form class="new-yum">
 		<input type="text" name="name" placeholder="Add a new Yum" />
 	</form>
-</template>
-
-<template name="edit">
-		
 </template>

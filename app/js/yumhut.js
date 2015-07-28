@@ -47,7 +47,10 @@ if (Meteor.isClient) {
 			Meteor.call('deleteYum', this._id, this.username );
 		},
 		'click .edit': function() {
-			Meteor.call('editYum', this._id);
+			Meteor.call('editYum', this._id, 'edit');
+		},
+		'click .cancel': function() {
+			Meteor.call('editYum', this._id, 'cancel');
 		},
 		'submit .edit-yum': function(e) {
 			e.preventDefault();
