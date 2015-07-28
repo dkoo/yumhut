@@ -5,7 +5,7 @@ var gulp = require('gulp'),
 	sass = require('gulp-sass');
 
 /* lint js files */
-gulp.task('jshint', function() {
+gulp.task('lint', function() {
 	return gulp.src('../app/**/*.js')
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'));
@@ -20,8 +20,9 @@ gulp.task('sass', function() {
 
 /* watch files for changes and execute tasks */
 gulp.task('watch', function() {
-	gulp.watch('../**/*.scss', ['lint', 'sass']);
+	gulp.watch('../**/*.scss', ['sass']);
+	gulp.watch('../app/**/*.js', ['lint']);
 });
 
 /* default gulp task */
-gulp.task('default', ['lint', 'sass', 'watch']);
+gulp.task('default', ['watch']);
