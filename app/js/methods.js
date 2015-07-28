@@ -19,10 +19,18 @@ Meteor.methods({
       throw new Meteor.Error('not-authorized');
     }
   },
-  setChecked: function(yumId, setChecked) {
+  editYum: function(yumId) {
     Yums.update(yumId, {
       $set: {
-        checked: setChecked
+        editing: true
+      }
+    });
+  },
+  updateYum: function(yumId, input) {
+    Yums.update(yumId, {
+      $set: {
+        name: input,
+        editing: false
       }
     });
   }

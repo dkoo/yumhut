@@ -30,13 +30,21 @@
 </body>
 
 <template name="yum">
-	<li class="{{#if checked}}checked{{/if}}">
-		<button class="delete">&times;</button>
-		<input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-		<h1>{{name}}</h1>
+	<li>
+		<button class="delete">delete this yum</button>
+		<h1>
+			{{#if editing}}
+				<form class="edit-yum">
+					<input type="text" name="name" placeholder="{{name}}" />
+				</form>
+			{{else}}
+				{{name}} <button class="edit" name="name">edit</button>
+			{{/if}}
+		</h1>
 		<h2>Categories TK</h2>
 		<p>Description TK, TK</p>
 		<p><em>&#8212;{{username}}</em></p>
+		{{> edit}}
 	</li>
 </template>
 
@@ -44,4 +52,8 @@
 	<form class="new-yum">
 		<input type="text" name="name" placeholder="Add a new Yum" />
 	</form>
+</template>
+
+<template name="edit">
+		
 </template>

@@ -1,7 +1,7 @@
 Yums = new Mongo.Collection('yums');
 
 if (Meteor.isClient) {
-  Meteor.subscribe('yums');
+	Meteor.subscribe('yums');
 
 	Template.body.helpers({
 		yums: function() {
@@ -26,7 +26,7 @@ if (Meteor.isClient) {
 			var input = e.target.name.value;
 
 			// add a Yum
-      Meteor.call('addYum', input);
+			Meteor.call('addYum', input);
 
 			// clear after submitting
 			e.target.name.value = '';
@@ -36,18 +36,29 @@ if (Meteor.isClient) {
 		}
 	});
 
-  Template.yum.helpers({
-    isOwner: function() {
-      return this.owner === Meteor.userId();
-    }
-  });
+	Template.yum.helpers({
+		isOwner: function() {
+			return this.owner === Meteor.userId();
+		}
+	});
 
 	Template.yum.events({
-		'click .toggle-checked': function() {
-			Meteor.call('setChecked', this._id, this.checked);
-		},
 		'click .delete': function() {
 			Meteor.call('deleteYum', this._id, this.username );
+		},
+		'click .edit': function() {
+			Meteor.call('editYum', this._id);
+		},
+		'submit .edit-yum': function(e) {
+			e.preventDefault();
+
+			var input = e.target.name.value;
+
+			// edit Yum
+			Meteor.call('updateYum', this._id, input);
+
+			// reset form
+			e.target.name.value = input;
 		}
 	});
 
@@ -58,8 +69,8 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 	Meteor.publish('yums', function () {
-    return Yums.find({
-      owner: this.userId
-    });
+		return Yums.find({
+			owner: this.userId
+		});
 	});
 }
