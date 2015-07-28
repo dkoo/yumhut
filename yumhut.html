@@ -9,12 +9,15 @@
 			<h2>where are the yums?</h2>
 
 			{{#if currentUser}}
-				logged in as 
+				signed in as 
+			{{else}}
+				<h3>Sign in to get some yums</h3>
+				<p>Yumhut is a place to house all your favorite yums.</p>
 			{{/if}}
 			{{> loginButtons}}
 
 			{{#if currentUser}}
-				<p>You have {{showCount}} yums</p>
+				{{> count}}
 
 				{{> add}}
 				<label class="filter">
@@ -49,6 +52,14 @@
 		<p><em>&#8212;{{username}}</em></p>
 		<button class="delete">delete this yum</button>
 	</li>
+</template>
+
+<template name="count">
+	<p>You have {{showCount}} yums.</p>
+
+	{{#if showCountIs 0}}
+		<p>Start adding some yums!</p>
+	{{/if}}
 </template>
 
 <template name="add">

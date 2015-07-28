@@ -13,9 +13,6 @@ if (Meteor.isClient) {
 		},
 		filtered: function() {
 			return Session.get('filtered');
-		},
-		showCount: function() {
-			return Yums.find({checked: {$ne: true}}).count();
 		}
 	});
 
@@ -33,6 +30,15 @@ if (Meteor.isClient) {
 		},
 		'change .filter input': function(e) {
 			Session.set('filtered', e.target.checked);
+		}
+	});
+
+	Template.count.helpers({
+		showCount: function() {
+			return Yums.find({checked: {$ne: true}}).count();
+		},
+		showCountIs: function(count) {
+			return Yums.find().count() === count;
 		}
 	});
 
