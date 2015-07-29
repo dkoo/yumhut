@@ -6,22 +6,22 @@ var gulp = require('gulp'),
 
 /* lint js files */
 gulp.task('lint', function() {
-	return gulp.src('../app/**/*.js')
+	return gulp.src(['../client/**/*.js', '../server/**/*.js'])
 		.pipe(jshint())
 		.pipe(jshint.reporter('jshint-stylish'));
 });
 
 /* compile .scss files to CSS */
 gulp.task('sass', function() {
-	return gulp.src('../app/stylesheets/styles.scss')
+	return gulp.src('../client/stylesheets/styles.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
-		.pipe(gulp.dest('../dist/'));
+		.pipe(gulp.dest('../client/stylesheets/'));
 });
 
 /* watch files for changes and execute tasks */
 gulp.task('watch', function() {
 	gulp.watch('../**/*.scss', ['sass']);
-	gulp.watch('../app/**/*.js', ['lint']);
+	gulp.watch(['../client/**/*.js', '../server/**/*.js'], ['lint']);
 });
 
 /* default gulp task */
