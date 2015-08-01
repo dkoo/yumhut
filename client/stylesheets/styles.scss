@@ -1,2 +1,13 @@
+// normalize stylesheet
+@import "partials/_normalize";
+
+// typography
+@import url('http://fonts.googleapis.com/css?family=Varela+Round');
+@import url('http://fonts.googleapis.com/css?family=Lato:400,700,900,400italic,700italic,900italic');
+
+// main layout styles
 @import "partials/_main";
+@import "partials/_add";
+
+// default tutorial styles
 // @import "partials/_default"; 

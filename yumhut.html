@@ -20,10 +20,6 @@
 				{{> count}}
 
 				{{> add}}
-				<label class="filter">
-					<input type="checkbox" checked="{{filtered}}" />
-					Hide checked yums
-				</label>
 			{{/if}}
 		</header>
 
@@ -36,22 +32,27 @@
 </body>
 
 <template name="yum">
-	<li>
-		<h1>
-			{{#if editing}}
-				<form class="edit-yum">
-					<input type="text" name="name" placeholder="{{name}}" /> <button>save</button>
-				</form>
-				<button class="cancel" name="name">cancel</button>
-			{{else}}
-				{{name}} <button class="edit" name="name">edit</button>
-			{{/if}}
-		</h1>
-		<h2>Categories TK</h2>
-		<p>Description TK, TK</p>
-		<p><em>&#8212;{{username}}</em></p>
-		<button class="delete">delete this yum</button>
-	</li>
+	{{#if isOwner}}
+		<li>
+			<form class="edit-yum {{#if editing}}visible{{/if}}">
+				<input name="editname_{{id}}" type="text" placeholder="{{name}}" required>
+				<input name="editaddress_{{id}}" type="text" placeholder="{{address}}">
+				{{favs}}
+				<textarea name="editnotes_{{id}}" placeholder="{{notes}}"></textarea>
+				<button>save</button>
+				<button class="cancel">cancel</button>
+			</form>
+			<div class="{{#if editing}}hidden{{/if}}">
+				<h1>{{name}} <button class="edit" name="name">edit</button></h1>
+				<h2>{{address}}</h2>
+				<p>{{favs}}</p>
+				<p>{{notes}}</p>
+			</div>
+			<p>{{id}}</p>
+			<p><em>added by {{username}}</em></p>
+			<button class="delete">delete this yum</button>
+		</li>
+	{{/if}}
 </template>
 
 <template name="count">
@@ -63,7 +64,18 @@
 </template>
 
 <template name="add">
-	<form class="new-yum">
-		<input type="text" name="name" placeholder="Add a new Yum" />
-	</form>
+		<button class="add {{#if adding}}{{else}}visible{{/if}}">add a yum</button>
+	
+		<form class="new-yum {{#if adding}}visible{{/if}}">
+			<input id="autocomplete" name="add_name" placeholder="Add a yum" type="text" required>
+			<input name="add_address" type="text" placeholder="Address">
+			<textarea name="add_favs" placeholder="Your favs (enter each fav on its own line)"></textarea>
+			<textarea name="add_notes" placeholder="Description"></textarea>
+			<button class="save">save</button> <button class="cancel">cancel</button>
+		</form>
+
+		<label class="filter">
+			<input type="checkbox" checked="{{filtered}}" />
+			Hide checked yums
+		</label>
 </template>
