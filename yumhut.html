@@ -3,41 +3,50 @@
 </head>
 
 <body>
-	<div class="container">
+	<header id="top">
+		<nav></nav>
+		{{#if currentUser}}signed in as  {{/if}}
+		{{> loginButtons}}
+	</header>
+
+	<div class="container {{#if currentUser}}{{else}}default{{/if}}">
 		<header>
 			<h1>yumhut</h1>
-			<h2>where are the yums?</h2>
-
-			{{#if currentUser}}
-				signed in as 
-			{{else}}
-				<h3>Sign in to get some yums</h3>
-				<p>Yumhut is a place to house all your favorite yums.</p>
-			{{/if}}
-			{{> loginButtons}}
-
+			<h2>Where are the yums?</h2>
 			{{#if currentUser}}
 				{{> count}}
 
 				{{> add}}
+			{{else}}
+				<p>Yumhut is a place to house all your favorite yums.</p>
+				<h3>Sign in to get some yums</h3>
 			{{/if}}
 		</header>
 
-		<ul class="yums">
-			{{#each yums}}
-				{{> yum}}
-			{{/each}}
-		</ul>
+		{{#if currentUser}}
+			<ul class="yums">
+				{{#each yums}}
+					{{> yum}}
+				{{/each}}
+			</ul>
+		{{/if}}
 	</div>
 </body>
 
+
+<!-- YUM TEMPLATE -->
 <template name="yum">
 	{{#if isOwner}}
 		<li>
 			<form class="edit-yum {{#if editing}}visible{{/if}}">
-				<input name="editname_{{id}}" type="text" placeholder="{{name}}" required>
+				<input name="editname_{{id}}" type="text" placeholder="{{name}}">
 				<input name="editaddress_{{id}}" type="text" placeholder="{{address}}">
-				{{favs}}
+				<ul>
+					{{#each showFavs}}
+						<li>{{this}} <a class="deletefav" href="#">&times;</a></li>
+					{{/each}}
+				</ul>
+				<input name="fav_{{id}}" type="text" placeholder="Add a fav"> <button name="fav_{{id}}" class="addfav">&plus;</button>
 				<textarea name="editnotes_{{id}}" placeholder="{{notes}}"></textarea>
 				<button>save</button>
 				<button class="cancel">cancel</button>
@@ -45,24 +54,43 @@
 			<div class="{{#if editing}}hidden{{/if}}">
 				<h1>{{name}} <button class="edit" name="name">edit</button></h1>
 				<h2>{{address}}</h2>
-				<p>{{favs}}</p>
+				<ul>
+					{{#each showFavs}}
+						<li>{{this}}</li>
+					{{/each}}
+				</ul>
 				<p>{{notes}}</p>
 			</div>
 			<p>{{id}}</p>
 			<p><em>added by {{username}}</em></p>
 			<button class="delete">delete this yum</button>
+			{{#if deleting}}
+				<div class="modal deleteme">
+					<h2>Are you sure you want to delete {{name}}?</h2>
+					<button class="yes">Yes</button>
+					<button class="no">Cancel</button>
+				</div>
+			{{/if}}
 		</li>
 	{{/if}}
 </template>
 
+<!-- YUM COUNT TEMPLATE -->
 <template name="count">
-	<p>You have {{showCount}} yums.</p>
+	<p>You have 
+		{{#if showCountIs 1}}
+			1 yum. Try adding some more!
+		{{else}}
+			{{showCount}} yums!
+		{{/if}}
+	</p>
 
 	{{#if showCountIs 0}}
 		<p>Start adding some yums!</p>
 	{{/if}}
 </template>
 
+<!-- ADD YUM TEMPLATE -->
 <template name="add">
 		<button class="add {{#if adding}}{{else}}visible{{/if}}">add a yum</button>
 	
@@ -73,9 +101,4 @@
 			<textarea name="add_notes" placeholder="Description"></textarea>
 			<button class="save">save</button> <button class="cancel">cancel</button>
 		</form>
-
-		<label class="filter">
-			<input type="checkbox" checked="{{filtered}}" />
-			Hide checked yums
-		</label>
 </template>

@@ -65,5 +65,16 @@ Meteor.methods({
 				return false;
 			}
 		}
+	},
+	updateFavs: function(yumId, newFavs, username) {
+		if ( Meteor.user().username === username ) {
+			if ( newFavs ) {
+				Yums.update(yumId, {
+					$set: {
+						favs: newFavs
+					}
+				});
+			}
+		}
 	}
 });

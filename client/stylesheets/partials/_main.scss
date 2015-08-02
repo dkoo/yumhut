@@ -1,5 +1,6 @@
 body {
 	font-family: 'Lato', sans-serif;
+	box-sizing: border-box;
 	padding: 1em;
 }
 
@@ -9,16 +10,45 @@ h1 {
 	text-transform: uppercase;
 }
 
-header {
-	h1 {
-		font-size: 3em;
-		line-height: 1em;
+.container {
+	box-sizing: border-box;
+	&.default{
+		height: 100%;
+		overflow: auto;
+		text-align: center;
+		&::after,
+		header {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		&::after {
+			content: '';
+			height: 100%;
+			margin-left: -0.25em;
+		}
+		header {
+			max-width: 99%;
+		}
+	}
+	header {
+		text-align: center;
+		h1,
+		h2,
+		h3 {
+			line-height: 3rem;
+		}
+		h1 {
+			font-size: 3em;
+		}
+		h2 {
+			font-size: 1.5em;
+		}
 	}
 }
 
 .new-yum,
 .yums span,
-.yums form,
+.yums .edit-yum,
 .yums div.hidden,
 .add {
 	display: none;
