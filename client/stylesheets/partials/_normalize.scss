@@ -5,6 +5,7 @@ html,
 body {
     height: 100%;
     width: 100%;
+    box-sizing: border-box;
 }
 
 html {
@@ -53,13 +54,19 @@ a {
 }
 button {
     overflow: visible;
+    background-color: $lightblue;
     border: 0;
-    font: inherit;
-    -webkit-font-smoothing: inherit;
+    border-radius: 0.5em;
+    padding: 0.25em 1em;
+    @include smallcaps(12px);
+    font-weight: 700;
+    text-align: center;
     letter-spacing: inherit;
-    background: none;
     cursor: pointer;
-    color: #ccc;
+    color: white;
+    &:hover {
+        background-color: $blue;
+    }
 }
 ::-moz-focus-inner {
     padding: 0;
@@ -72,4 +79,24 @@ img {
     max-width: 100%;
     height: auto;
     border: 0;
+}
+input,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.25em 0.5em;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid $lightblue;
+    border-radius: 0.25em;
+    margin-bottom: 1em;
+    display: inline-block;
+    transition: 0.3s;
+    &:hover,
+    &:focus {
+        border-color: $blue;
+    }
+}
+textarea {
+    display: block;
 }

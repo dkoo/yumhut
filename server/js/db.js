@@ -34,6 +34,15 @@ Meteor.methods({
 			throw new Meteor.Error('not-authorized');
 		}
 	},
+	deleting: function(yumId, action) {
+		var state = action === 'delete' ? true : false;
+		
+		Yums.update(yumId, {
+			$set: {
+				deleting: state
+			}
+		});
+	},
 	editYum: function(yumId, action) {
 		var state = action === 'edit' ? true : false;
 		

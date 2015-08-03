@@ -1,4 +1,57 @@
 header#top {
+	background: white;
+	box-sizing: border-box;
+	@include smallcaps(12px);
+	font-weight: 300;
+	padding: 1em;
 	position: absolute;
+	text-transform: uppercase;
 	width: 100%;
+	z-index: 10;
+	color: $blue;
+	&.background {
+		z-index: -1;
+	}
+	a {
+		font-weight: 700;
+		color: $blue;
+		&:hover {
+			color: black;
+		}
+	}
+	#login-buttons {
+		a {
+			text-decoration: none;
+		}
+		.login-close-text,
+		.login-button,
+		.accounts-dialog *,
+		.signup-link,
+		label {
+			font-family: 'Lato', sans-serif !important;
+			font-size: 12px;
+			letter-spacing: 0.025rem !important;
+		}
+		.login-close-text,
+		.login-button,
+		.accounts-dialog *,
+		.signup-link {
+			font-weight: 700;
+		}
+		label {
+			font-weight: 300;
+		}
+		input[type='text'],
+		input[type='password'] {
+			margin-bottom: 1em;
+			transition: 0.3s;
+			&:hover,
+			&:focus {
+				border-color: black;
+			}
+		}
+		.login-button {
+			transition: 0.3s;
+		}
+	}
 }

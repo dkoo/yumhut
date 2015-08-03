@@ -3,6 +3,33 @@ Template.yum.onRendered(function() {
 	Meteor.call('editYum', this.data._id, 'cancel');
 });
 
+Template.body.helpers({
+	'click button.add': function(e) {
+		e.preventDefault();
+
+		// enter "add" mode
+		Session.set('adding', true);
+		var searchBar = document.getElementById('autocomplete'),
+			address = document.getElementsByName('add_address')[0],
+			place,
+			autocomplete = new google.maps.places.Autocomplete(
+				searchBar, {types: ['establishment'] }
+			);
+
+		// set up the Google Places search bar
+		google.maps.event.addListener(autocomplete, 'place_changed', function() {
+			setPlace(searchBar, autocomplete.getPlace());
+
+			place = Session.get('place');
+
+			if ( place ) {
+				searchBar.value = place.name;
+				address.value = place.vicinity;
+			}
+		});
+	},
+});
+
 // add yum helpers
 Template.add.helpers({
 	adding: function() {
@@ -53,30 +80,6 @@ Template.add.events({
 	'change .filter input': function(e) {
 		Session.set('filtered', e.target.checked);
 	},
-	'click button.add': function(e) {
-		e.preventDefault();
-
-		// enter "add" mode
-		Session.set('adding', true);
-		var searchBar = document.getElementById('autocomplete'),
-			address = document.getElementsByName('add_address')[0],
-			place,
-			autocomplete = new google.maps.places.Autocomplete(
-				searchBar, {types: ['establishment'] }
-			);
-
-		// set up the Google Places search bar
-		google.maps.event.addListener(autocomplete, 'place_changed', function() {
-			setPlace(searchBar, autocomplete.getPlace());
-
-			place = Session.get('place');
-
-			if ( place ) {
-				searchBar.value = place.name;
-				address.value = place.formatted_address;
-			}
-		});
-	},
 	'click .new-yum button.cancel': function(e) {
 		e.preventDefault();
 
@@ -92,14 +95,14 @@ Template.yum.helpers({
 	isOwner: function() {
 		return this.owner === Meteor.userId();
 	},
+	countFavs: function() {
+		return this.favs[0] ? true : false;
+	},
 	showFavs: function() {
 		return this.favs;
 	},
 	listFavs: function() {
 		return this.favs.join('\n');
-	},
-	deleting: function() {
-		return Session.get('deleting');
 	}
 });
 
@@ -107,6 +110,7 @@ Template.yum.helpers({
 Template.yum.events({
 	// enter "edit" mode
 	'click .edit': function(e) {
+		e.preventDefault();
 		Meteor.call('editYum', this._id, 'edit');
 		var parent = e.currentTarget.parentNode.parentNode,
 			id = this.id,
@@ -123,15 +127,14 @@ Template.yum.events({
 
 			if ( place ) {
 				yumname.value = place.name;
-				address.value = place.formatted_address;
+				address.value = place.vicinity;
 			}
 		});
 	},
 	// add a fav
 	'click .addfav': function(e) {
-		console.log('added');
-
 		e.preventDefault();
+
 		var id = this._id,
 			placeId = this.id,
 			favs = this.favs || [],
@@ -148,7 +151,7 @@ Template.yum.events({
 	},
 	// delete a fav
 	'click .deletefav': function(e) {
-		console.log('baleeted');
+		e.preventDefault();
 
 		e.preventDefault();
 		var doc = Template.instance().data,
@@ -167,18 +170,21 @@ Template.yum.events({
 		}
 	},
 	// delete a yum
-	'click .delete': function() {
+	'click .delete': function(e) {
+		e.preventDefault();
+		Meteor.call('deleting', this._id, 'delete');
 		Session.set('deleting', true);
 	},
 	// confirm delete?
 	'click .deleteme .yes': function(e) {
-		if ( Session.get('deleting') ) {
-			Meteor.call('deleteYum', this._id, this.username );
-		}
+		e.preventDefault();
+		Meteor.call('deleteYum', this._id, this.username );
 		Session.set('deleting', false);
 	},
 	// cancel delete
 	'click .deleteme .no': function(e) {
+		e.preventDefault();
+		Meteor.call('deleting', this._id, 'cancel');
 		Session.set('deleting', false);
 	},
 	// cancel "edit" mode
@@ -243,7 +249,7 @@ function setPlace(el, place) {
 	} else {
 		return;
 	}
-};
+}
 
 function randomString(length) {
 	var text = '';

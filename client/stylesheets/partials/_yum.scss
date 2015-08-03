@@ -1,0 +1,152 @@
+.yums {
+	box-sizing: border-box;
+	transition: 0.3s;
+	> li {
+		background: white;
+		border-radius: 0.5em;
+		box-sizing: border-box;
+		margin: 1em 0;
+		padding: 1em;
+		color: black;
+		transition: 0.3s;
+		width: 100%; // mobile styles
+		a.edit,
+		a.delete,
+		a.addfav {
+			font-family: 'Lato', sans-serif;
+			@include smallcaps(12px);
+			color: $lightblue;
+			&:hover {
+				color: $blue;
+			}
+		}
+		a.edit {
+			display: block;
+			margin-top: 1em;
+		}
+		a.delete {
+			float: right;
+			font-size: 18px;
+			font-weight: 900;
+		}
+		button.addfav {
+			background: none;
+			padding: 0;
+			font-size: 18px;
+			font-weight: 900;
+			color: $lightblue;
+			&:hover {
+				color: $blue;
+			}
+		}
+		h1 {
+			line-height: 1.25em;
+		}
+		h2 {
+			font-size: 14px;
+			font-weight: 400;
+		}
+		div,
+		form {
+			ul.favs {
+				li {
+					display: inline-block;
+					@include smallcaps(10px);
+					line-height: 1.5em;
+					font-weight: 400;
+					background: $lightblue;
+					border-radius: 0.5em;
+					margin: 0.25em 0;
+					padding: 0 1em;
+					color: white;
+					transition: 0.3s;
+					-webkit-column-break-inside: avoid;
+					vertical-align: top;
+				}
+			}
+			p {
+				margin-top: 1em;
+			}
+		}
+		div {
+			ul.favs {
+				margin-top: 1em;
+			}
+		}
+		.deleteme {
+			h2 {
+				margin: 1em 0;
+			}
+		}
+	}
+}
+
+.edit-yum {
+	h1 {
+		font-family: 'Varela Round', sans-serif;
+		font-weight: 400;
+		text-transform: uppercase;
+	}
+	ul.favs {
+		margin-top: 0;
+		margin-bottom: 0.5em
+	}
+	input,
+	textarea {
+		font-family: inherit;
+		font-size: inherit;
+		padding: 0.25em 0.5em;
+		width: 100%;
+		box-sizing: border-box;
+		border: 1px solid $lightblue;
+		border-radius: 0.25em;
+		display: inline-block;
+		transition: 0.3s;
+		&:hover,
+		&:focus {
+			border-color: $blue;
+		}
+		&.addfav {
+			width: auto;
+			margin-bottom: 0;
+		}
+	}
+	textarea {
+		display: block;
+		margin: 1em 0;
+	}
+}
+
+// tablet
+@media (min-width: 500px) and (max-width: 960px) {
+	.yums {
+		-webkit-column-count: 2;
+		-webkit-column-gap: 1em;
+		> li {
+			display: inline-block;
+			width: 100%;
+			margin: 0.5em 0;
+			-webkit-column-break-inside: avoid;
+			vertical-align: top;
+			&::first-child {
+				margin-top: 0;
+			}
+		}
+	}	
+}
+
+// desktop
+@media (min-width: 961px) {
+	.yums {
+		-webkit-column-count: 3;
+		li {
+			display: inline-block;
+			-webkit-column-break-inside: avoid;
+			vertical-align: top;
+			margin: 0.5em 0;
+			&::first-child {
+				margin-top: 0;
+			}
+		}
+	}
+}

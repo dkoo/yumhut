@@ -1,7 +1,7 @@
 body {
+	background: $green;
 	font-family: 'Lato', sans-serif;
-	box-sizing: border-box;
-	padding: 1em;
+	color: white;
 }
 
 h1 {
@@ -12,7 +12,17 @@ h1 {
 
 .container {
 	box-sizing: border-box;
-	&.default{
+	transition: all 0.3s ease-in-out;
+	opacity: 0;
+	transform: translate3d(0, 20em, 0);
+	height: 100%;
+	&.default,
+	&.home {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+		padding: 1em;
+	}
+	&.default {
 		height: 100%;
 		overflow: auto;
 		text-align: center;
@@ -29,12 +39,17 @@ h1 {
 		header {
 			max-width: 99%;
 		}
+		p {
+			font-weight: 300;
+			font-size: 1.25em;
+		}
 	}
 	header {
 		text-align: center;
 		h1,
 		h2,
 		h3 {
+			font-size: 1.25em;
 			line-height: 3rem;
 		}
 		h1 {
@@ -42,7 +57,11 @@ h1 {
 		}
 		h2 {
 			font-size: 1.5em;
+			font-weight: 900;
 		}
+	}
+	&.home {
+		padding-top: 4em;
 	}
 }
 
@@ -57,9 +76,39 @@ h1 {
 	}
 }
 
-.edit-yum {
-	input,
-	textarea {
-		display: block;
+.modal {
+	background: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 20;
+	height: 100%;
+	overflow: auto;
+	text-align: center;
+	top: 0;
+	left: 0;
+	form {
+		box-shadow: 0.5em 0.5em 0.5em rgba(0,0,0,0.15);
+		min-width: 33%;
+	}
+	h1 {
+		color: black;
+		margin-bottom: 1em;
+	}
+	&::after,
+	form {
+		display: inline-block;
+		vertical-align: middle;
+	}
+	&::after {
+		content: '';
+		height: 100%;
+		margin-left: -0.25em;
+	}
+	form {
+		display: inline-block;
+		background: white;
+		padding: 1em;
+		border-radius: 0.5em;
 	}
 }
