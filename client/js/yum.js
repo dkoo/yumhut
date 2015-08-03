@@ -116,9 +116,14 @@ Template.yum.events({
 			id = this.id,
 			yumname = document.getElementsByName('editname_' + id)[0],
 			address = document.getElementsByName('editaddress_' + id)[0],
+			notes = document.getElementsByName('editnotes_' + id)[0],
 			autocomplete = new google.maps.places.Autocomplete(
 				yumname, {types: ['establishment'] }
 			);
+
+		yumname.value = this.name;
+		address.value = this.address;
+		notes.value = this.notes;
 
 		google.maps.event.addListener(autocomplete, 'place_changed', function() {
 			setPlace(yumname, autocomplete.getPlace());

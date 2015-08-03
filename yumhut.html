@@ -54,8 +54,8 @@
 		{{/if}}
 		<input class="addfav" name="fav_{{id}}" type="text" placeholder="Add a fav"> <button name="fav_{{id}}" class="addfav">&plus;</button>
 		<textarea name="editnotes_{{id}}" placeholder="{{notes}}"></textarea>
-		<button>save</button>
-		<button class="cancel">cancel</button>
+		<button>save changes</button>
+		<button class="cancel">wait, no</button>
 	</form>
 	<div class="{{#if editing}}hidden{{/if}}">
 		<a href="#" class="delete" name="Delete this yum">&times;</a>
@@ -106,7 +106,7 @@
 			<input name="add_address" type="text" placeholder="The yum’s address">
 			<textarea name="add_favs" placeholder="Your favs (enter each on its own line)"></textarea>
 			<textarea name="add_notes" placeholder="Your notes for this yum"></textarea>
-			<button class="save">save</button> <button class="cancel">cancel</button>
+			<button class="save">add it</button> <button class="cancel">wait, don’t add it</button>
 		</form>
 	</div>
 </template>

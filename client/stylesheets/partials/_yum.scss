@@ -66,6 +66,7 @@
 			}
 			p {
 				margin-top: 1em;
+				font-weight: 300;
 			}
 		}
 		div {
@@ -102,6 +103,7 @@
 		border-radius: 0.25em;
 		display: inline-block;
 		transition: 0.3s;
+		text-transform: inherit;
 		&:hover,
 		&:focus {
 			border-color: $blue;
