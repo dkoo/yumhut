@@ -11,6 +11,9 @@ Template.body.helpers({
 			return Yums.find({}, {sort: {createdAt: -1}});
 		}
 	},
+	adding: function() {
+		return Session.get('adding');
+	},
 	deleting: function() {
 		return Session.get('deleting');
 	}

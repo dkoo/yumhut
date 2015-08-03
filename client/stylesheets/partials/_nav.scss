@@ -5,7 +5,7 @@ header#top {
 	@include smallcaps(12px);
 	font-weight: 300;
 	padding: 1em;
-	position: fixed;
+	position: absolute;;
 	text-transform: uppercase;
 	width: 100%;
 	z-index: 10;
