@@ -1,5 +1,6 @@
 <head>
 	<title>yumhut</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -28,7 +29,7 @@
 				<button class="add {{#if adding}}{{else}}visible{{/if}}">add a yum</button>
 			{{else}}
 				<h2>Where are the yums?</h2>
-				<p>Yumhut is a place to house your favorite yums.</p>
+				<p>Yumhut is a convenient place to house all the places that make you go “yum.” Add a yum, tag it with a location, jot down your favorite things to get there, and you’ll never forget where your favorite yums are again. Sign up to start tracking your yums.</p>
 				<h3><i class="fa fa-arrow-up"></i> Sign up to get some yums</h3>
 			{{/if}}
 		</header>
@@ -72,14 +73,7 @@
 		<a class="edit" href="#">edit</a>
 	</div>
 	{{#if deleting}}
-		<div class="deleteme modal">
-			<form>
-				<h1>Confirm delete</h1>
-				<h2>Are you sure you want to delete {{name}}?</h2>
-				<button class="yes">Yes, do it</button>
-				<button class="no">Wait, no</button>
-			</form>
-		</div>
+		{{> delete}}
 	{{/if}}
 </li>{{/if}}</template>
 
@@ -104,9 +98,20 @@
 			<h1>Add a new yum</h1>
 			<input id="autocomplete" name="add_name" placeholder="Enter a yum name" type="text" required>
 			<input name="add_address" type="text" placeholder="The yum’s address">
-			<textarea name="add_favs" placeholder="Your favs (enter each on its own line)"></textarea>
+			<textarea name="add_favs" placeholder="Your favs at this place (enter each on its own line)"></textarea>
 			<textarea name="add_notes" placeholder="Your notes for this yum"></textarea>
 			<button class="save">add it</button> <button class="cancel">wait, don’t add it</button>
+		</form>
+	</div>
+</template>
+
+<template name="delete">
+	<div class="deleteme modal">
+		<form>
+			<h1>Confirm delete</h1>
+			<h2>Are you sure you want to delete {{name}}?</h2>
+			<button class="yes">Yes, do it</button>
+			<button class="no">Wait, no</button>
 		</form>
 	</div>
 </template>

@@ -23,6 +23,8 @@ Template.body.events({
 	'click button.add': function(e) {
 		e.preventDefault();
 
+		document.body.classList.add('overflow');
+
 		// enter "add" mode
 		Session.set('adding', true);
 		var searchBar = document.getElementById('autocomplete'),

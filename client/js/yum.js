@@ -1,33 +1,7 @@
 // when yums first load, exit edit mode
 Template.yum.onRendered(function() {
 	Meteor.call('editYum', this.data._id, 'cancel');
-});
-
-Template.body.helpers({
-	'click button.add': function(e) {
-		e.preventDefault();
-
-		// enter "add" mode
-		Session.set('adding', true);
-		var searchBar = document.getElementById('autocomplete'),
-			address = document.getElementsByName('add_address')[0],
-			place,
-			autocomplete = new google.maps.places.Autocomplete(
-				searchBar, {types: ['establishment'] }
-			);
-
-		// set up the Google Places search bar
-		google.maps.event.addListener(autocomplete, 'place_changed', function() {
-			setPlace(searchBar, autocomplete.getPlace());
-
-			place = Session.get('place');
-
-			if ( place ) {
-				searchBar.value = place.name;
-				address.value = place.vicinity;
-			}
-		});
-	},
+	Meteor.call('deleting', this.data._id, 'cancel');
 });
 
 // add yum helpers
@@ -87,6 +61,7 @@ Template.add.events({
 		el.value = '';
 
 		Session.set('adding', false);
+		document.body.classList.remove('overflow');
 	}
 });
 
@@ -158,7 +133,6 @@ Template.yum.events({
 	'click .deletefav': function(e) {
 		e.preventDefault();
 
-		e.preventDefault();
 		var doc = Template.instance().data,
 			id = doc._id,
 			favs = doc.favs,
@@ -177,20 +151,10 @@ Template.yum.events({
 	// delete a yum
 	'click .delete': function(e) {
 		e.preventDefault();
+
+		document.body.classList.add('overflow');
 		Meteor.call('deleting', this._id, 'delete');
 		Session.set('deleting', true);
-	},
-	// confirm delete?
-	'click .deleteme .yes': function(e) {
-		e.preventDefault();
-		Meteor.call('deleteYum', this._id, this.username );
-		Session.set('deleting', false);
-	},
-	// cancel delete
-	'click .deleteme .no': function(e) {
-		e.preventDefault();
-		Meteor.call('deleting', this._id, 'cancel');
-		Session.set('deleting', false);
 	},
 	// cancel "edit" mode
 	'click .cancel': function(e) {
@@ -239,6 +203,41 @@ Template.yum.events({
 
 		// clear Session info after submitting
 		Session.set('place', null);
+	}
+});
+
+Template.delete.onRendered(function() {
+	var modal = document.querySelector('.deleteme'),
+		sizeModal = function(el) {
+			var scrolled = document.body.scrollTop,
+				viewportY = window.innerHeight;
+
+			el.style.cssText = 'height: ' + viewportY + 'px; margin-top: ' + scrolled + 'px;';
+		};
+
+	// size and center the modal
+	sizeModal(modal);
+
+	// resize and recenter the modal if the window size changes
+	$(window).resize(function(e) {
+		sizeModal(modal);
+	});
+});
+
+Template.delete.events({
+	// confirm delete?
+	'click .deleteme .yes': function(e) {
+		e.preventDefault();
+		Meteor.call('deleteYum', this._id, this.username );
+		Session.set('deleting', false);
+		document.body.classList.remove('overflow');
+	},
+	// cancel delete
+	'click .deleteme .no': function(e) {
+		e.preventDefault();
+		Meteor.call('deleting', this._id, 'cancel');
+		Session.set('deleting', false);
+		document.body.classList.remove('overflow');
 	}
 });
 
