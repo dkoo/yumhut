@@ -1,13 +1,12 @@
 # yumhut
-# based off Google Web Starter Kit
-# https://developers.google.com/web/starter-kit/
 
 ## Meteor
 *.meteor
 
 
 ## Builds
-dist
+dist/
+private/build/
 
 ## Node.js
 lib-cov
