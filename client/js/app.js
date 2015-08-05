@@ -1,15 +1,16 @@
 Template.body.onRendered(function() {
-	var container = document.querySelector('.container');
-	container.classList.add('default');
+	document.querySelector('.container').classList.add('default');
 });
 
 // body helpers
 Template.body.helpers({
 	login: function() {
 		document.body.classList.add('user');
+		document.querySelector('.container').classList.remove('default');
 	},
 	logout: function() {
 		document.body.classList.remove('user');
+		document.querySelector('.container').classList.add('default');
 	},
 	yums: function() {
 		if ( Session.get('filtered') ) {
