@@ -16,17 +16,17 @@ gulp.task('lint', function() {
 gulp.task('sass', function() {
 	return gulp.src('../client/stylesheets/styles.scss')
 		.pipe(sass({outputStyle: 'compressed'}))
-		.pipe(gulp.dest('assets/stylesheets/unprefixed'));
+		.pipe(gulp.dest('build/stylesheets/unprefixed'));
 });
 
 /* post-process CSS with autoprefixer */
 gulp.task('autoprefix', function() {
-	return gulp.src('assets/stylesheets/unprefixed/styles.css')
+	return gulp.src('build/stylesheets/unprefixed/styles.css')
 		.pipe(autoprefixer({
 			browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],
 			cascade: false
 		}))
-		.pipe(gulp.dest('../client/stylesheets/compiled'));
+		.pipe(gulp.dest('../dist'));
 });
 
 /* watch files for changes and execute tasks */
