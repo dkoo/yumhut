@@ -4,7 +4,7 @@
 *.meteor
 
 ## Google Places API (contains API key)
-client/js/compatibility/
+## client/js/compatibility/
 
 ## Builds
 dist/
