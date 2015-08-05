@@ -4,6 +4,12 @@
 </head>
 
 <body>
+	{{#if currentUser}}
+		{{login}}
+	{{else}}
+		{{logout}}
+	{{/if}}
+
 	<header id="top" class="{{#if deleting}}background{{/if}}">
 		<nav></nav>
 		{{#if currentUser}}Hi there, {{/if}}
@@ -16,10 +22,6 @@
 	<div class="container 
 		{{#if currentUser}}
 			home
-		{{else}}
-			{{#if startup}}
-				default
-			{{/if}}
 		{{/if}}">
 		<header>
 			<h1>yumhut</h1>

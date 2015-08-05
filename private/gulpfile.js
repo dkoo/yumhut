@@ -32,7 +32,7 @@ gulp.task('autoprefix', function() {
 /* watch files for changes and execute tasks */
 gulp.task('watch', function() {
 	gulp.watch('../**/*.scss', ['sass']);
-	gulp.watch('*.css', ['autoprefix']);
+	gulp.watch('**/*.css', ['autoprefix']);
 	gulp.watch(['../client/**/*.js', '../server/**/*.js'], ['lint']);
 });
 

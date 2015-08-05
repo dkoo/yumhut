@@ -1,7 +1,11 @@
 body {
-	background: $green;
+	background: $blue;
 	font-family: 'Lato', sans-serif;
 	color: white;
+	transition: background-color 1s ease-in-out;
+	&.user {
+		background-color: $green;
+	}
 	&.overflow {
 		overflow: hidden;
 	}
@@ -15,9 +19,9 @@ h1 {
 
 .container {
 	box-sizing: border-box;
-	transition: all 0.3s ease-in-out;
+	transition: transform 0.5s ease-in-out;
 	opacity: 0;
-	transform: translate3d(0, 20em, 0);
+	transform: translate3d(0, 20rem, 0);
 	height: 100%;
     &.adding,
     &.deleting {
