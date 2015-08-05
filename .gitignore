@@ -3,6 +3,8 @@
 ## Meteor
 *.meteor
 
+## Google Places API (contains API key)
+client/js/compability/
 
 ## Builds
 dist/
