@@ -8,10 +8,6 @@ Template.body.helpers({
 		document.body.classList.add('user');
 		document.querySelector('.container').classList.remove('default');
 	},
-	logout: function() {
-		document.body.classList.remove('user');
-		document.querySelector('.container').classList.add('default');
-	},
 	yums: function() {
 		if ( Session.get('filtered') ) {
 			return Yums.find({checked: {$ne: true}}, {sort: {createdAt: -1}});
@@ -60,6 +56,14 @@ Template.body.events({
 				address.value = place.vicinity;
 			}
 		});
+	}
+});
+
+// reset default class names when logging out
+Template.loginButtons.events({
+	'click #login-buttons-logout': function() {
+		document.querySelector('.container').classList.add('default');
+		document.body.classList.remove('user');
 	}
 });
 
