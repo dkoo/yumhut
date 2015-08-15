@@ -1,8 +1,5 @@
 # yumhut
 
-## Meteor
-*.meteor
-
 ## Google Places API (contains API key)
 client/js/compatibility/googlePlaces.js
 
