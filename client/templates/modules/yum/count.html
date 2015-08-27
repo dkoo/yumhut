@@ -1,0 +1,12 @@
+<template name="count">
+	<p>You have 
+		{{#if showCountIs 1}}
+			just 1 yum. Try adding some more!
+		{{else}}
+			{{showCount}} yums!
+			{{#if showCountIs 0}}
+				Try adding some yums...
+			{{/if}}
+		{{/if}}
+	</p>
+</template>

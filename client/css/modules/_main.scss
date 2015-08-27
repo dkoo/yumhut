@@ -1,6 +1,6 @@
 body {
 	background: $blue;
-	font-family: 'Lato', sans-serif;
+	font-family: $sans;
 	color: white;
 	transition: background-color 1s ease-in-out;
 	&.user {
@@ -13,7 +13,7 @@ body {
 }
 
 h1 {
-	font-family: 'Varela Round', sans-serif;
+	font-family: $display;
 	font-weight: 400;
 	text-transform: uppercase;
 }
@@ -124,6 +124,6 @@ h1 {
 		display: inline-block;
 		background: white;
 		padding: 1em;
-		border-radius: 0.5em;
+		border-radius: 0.25em;
 	}
 }

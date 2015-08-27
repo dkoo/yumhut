@@ -4,67 +4,6 @@ Template.yum.onRendered(function() {
 	Meteor.call('deleting', this.data._id, 'cancel');
 });
 
-// add yum helpers
-Template.add.helpers({
-	adding: function() {
-		return Session.get('adding');
-	},
-	filtered: function() {
-		return Session.get('filtered');
-	}
-});
-
-// add yum events
-Template.add.events({
-	'submit .new-yum': function(e) {
-		e.preventDefault();
-
-		// enter add mode
-		Session.set('adding', true);
-
-		// retrieve autocomplete results
-		var place = Session.get('place'),
-			placeDetails = {};
-
-		// if there was a Google place result
-		if ( place ) {
-			placeDetails.id = place.place_id;
-			placeDetails.loc = place.geometry.location;
-		} else {
-			// otherwise, just give it a random unique id
-			placeDetails.id = randomString(6);
-		}
-
-		// get the inputted values
-		placeDetails.name = e.target.add_name.value;
-		placeDetails.address = e.target.add_address.value;
-		placeDetails.favs = e.target.add_favs.value;
-		placeDetails.notes = e.target.add_notes.value;
-
-		// add the Yum{
-		Meteor.call('addYum', placeDetails);
-
-		// clear after submitting
-		e.target.name.value = '';
-
-		// delete Session info after submitting
-		Session.set('place', null);
-		Session.set('adding', false);
-	},
-	'change .filter input': function(e) {
-		Session.set('filtered', e.target.checked);
-	},
-	'click .new-yum button.cancel': function(e) {
-		e.preventDefault();
-
-		var el = document.getElementById('autocomplete');
-		el.value = '';
-
-		Session.set('adding', false);
-		document.body.classList.remove('overflow');
-	}
-});
-
 // yum helpers
 Template.yum.helpers({
 	isOwner: function() {
@@ -101,7 +40,7 @@ Template.yum.events({
 		notes.value = this.notes;
 
 		google.maps.event.addListener(autocomplete, 'place_changed', function() {
-			setPlace(yumname, autocomplete.getPlace());
+			Meteor.utils.setPlace(autocomplete.getPlace());
 
 			place = Session.get('place');
 
@@ -205,61 +144,3 @@ Template.yum.events({
 		Session.set('place', null);
 	}
 });
-
-Template.delete.onRendered(function() {
-	var modal = document.querySelector('.deleteme'),
-		sizeModal = function(el) {
-			var scrolled = document.body.scrollTop,
-				viewportY = window.innerHeight;
-
-			el.style.cssText = 'height: ' + viewportY + 'px; margin-top: ' + scrolled + 'px;';
-		};
-
-	// size and center the modal
-	sizeModal(modal);
-
-	// resize and recenter the modal if the window size changes
-	$(window).resize(function(e) {
-		sizeModal(modal);
-	});
-});
-
-Template.delete.events({
-	// confirm delete?
-	'click .deleteme .yes': function(e) {
-		e.preventDefault();
-		Meteor.call('deleteYum', this._id, this.username );
-		Session.set('deleting', false);
-		document.body.classList.remove('overflow');
-	},
-	// cancel delete
-	'click .deleteme .no': function(e) {
-		e.preventDefault();
-		Meteor.call('deleting', this._id, 'cancel');
-		Session.set('deleting', false);
-		document.body.classList.remove('overflow');
-	}
-});
-
-
-// utility functions for the rest of the app
-
-// temporarily store place info in Session
-function setPlace(el, place) {
-	if ( place.place_id ) {
-		var placeId = place.place_id;
-
-		Session.set('place', place);
-	} else {
-		return;
-	}
-}
-
-function randomString(length) {
-	var text = '';
-	var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	for(var i = 0; i < length; i++) {
-			text += possible.charAt(Math.floor(Math.random() * possible.length));
-	}
-	return text;
-}
