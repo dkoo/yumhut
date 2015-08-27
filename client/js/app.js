@@ -1,3 +1,20 @@
+// init Yums collection
+Yums = new Mongo.Collection('yums');
+
+// watch the yums template for changes
+Meteor.subscribe('yums');
+
+// startup actions
+Meteor.startup(function() {
+	Session.set('adding', false);
+	Session.set('deleting', false);
+});
+
+// config for accounts.ui package
+Accounts.ui.config({
+	passwordSignupFields: "USERNAME_ONLY"
+});
+
 Template.body.onRendered(function() {
 	document.querySelector('.container').classList.add('default');
 });
@@ -47,7 +64,7 @@ Template.body.events({
 
 		// set up the Google Places search bar
 		google.maps.event.addListener(autocomplete, 'place_changed', function() {
-			setPlace(searchBar, autocomplete.getPlace());
+			Meteor.utils.setPlace(autocomplete.getPlace());
 
 			place = Session.get('place');
 
@@ -77,14 +94,3 @@ Template.count.helpers({
 		return yumCount === count ? count === 1 || count === 0 ? true : false : false;
 	}
 });
-
-// temporarily store place info in Session
-function setPlace(el, place) {
-	if ( place.place_id ) {
-		var placeId = place.place_id;
-
-		Session.set('place', place);
-	} else {
-		return;
-	}
-}

@@ -1,0 +1,12 @@
+<template name="add">
+	<div id="add" class="{{#if adding}}modal{{/if}}">	
+		<form class="new-yum">
+			<h1>Add a new yum</h1>
+			<input id="autocomplete" name="add_name" placeholder="Enter a yum name" type="text" required>
+			<input name="add_address" type="text" placeholder="The yum’s address">
+			<textarea name="add_favs" placeholder="Your favs at this place (enter each on its own line)"></textarea>
+			<textarea name="add_notes" placeholder="Your notes for this yum"></textarea>
+			<button class="save">add it</button> <button class="cancel">wait, don’t add it</button>
+		</form>
+	</div>
+</template>

@@ -3,7 +3,7 @@
 	transition: 0.3s;
 	> li {
 		background: white;
-		border-radius: 0.5em;
+		border-radius: 0.25em;
 		box-sizing: border-box;
 		margin: 1em 0;
 		padding: 1em;
@@ -13,7 +13,7 @@
 		a.edit,
 		a.delete,
 		a.addfav {
-			font-family: 'Lato', sans-serif;
+			font-family: $sans;
 			@include smallcaps(12px);
 			color: $lightblue;
 			&:hover {
@@ -55,7 +55,7 @@
 					line-height: 1.5em;
 					font-weight: 400;
 					background: $darkgreen;
-					border-radius: 0.5em;
+					border-radius: 0.25em;
 					margin: 0.25em 0;
 					padding: 0 1em;
 					color: white;
@@ -84,7 +84,7 @@
 
 .edit-yum {
 	h1 {
-		font-family: 'Varela Round', sans-serif;
+		font-family: $display;
 		font-weight: 400;
 		text-transform: uppercase;
 	}
@@ -100,7 +100,6 @@
 		width: 100%;
 		box-sizing: border-box;
 		border: 1px solid $lightblue;
-		border-radius: 0.25em;
 		display: inline-block;
 		transition: 0.3s;
 		text-transform: inherit;
