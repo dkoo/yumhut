@@ -1,9 +1,9 @@
 // variables and mixins
-@import "partials/_vars";
-@import "partials/_mixins";
+@import "components/_vars";
+@import "components/_mixins";
 
 // normalize stylesheet
-@import "partials/_normalize";
+@import "base/_normalize";
 
 // typography
 @import url('http://fonts.googleapis.com/css?family=Varela+Round');
@@ -13,7 +13,7 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
 
 // main layout styles
-@import "partials/_main";
-@import "partials/_nav";
-@import "partials/_add";
-@import "partials/_yum";
+@import "modules/_main";
+@import "modules/_nav";
+@import "modules/_yum";
+@import "modules/yum/_add";

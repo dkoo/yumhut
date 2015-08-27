@@ -1,0 +1,38 @@
+<head>
+	<title>yumhut</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+
+<body>
+	{{#if currentUser}}
+		{{login}}
+	{{/if}}
+
+	<header id="top" class="{{#if deleting}}background{{/if}}">
+		<nav></nav>
+		{{#if currentUser}}Hi there, {{/if}}
+		{{> loginButtons}}
+	</header>
+
+		{{> add}}
+
+
+	<div class="container {{#if currentUser}}home{{/if}}">
+		<header>
+			<h1>yumhut</h1>
+			{{#if currentUser}}
+				{{> count}}
+
+				<button class="add {{#if adding}}{{else}}visible{{/if}}">add a yum</button>
+			{{else}}
+				<h2>Where are the yums?</h2>
+				<p>Yumhut is a convenient place to house all the places that make you go “yum.” Add a yum, tag it with a location, jot down your favorite things to get there, and you’ll never forget where your favorite yums are again. Sign up to start tracking your yums.</p>
+				<h3><i class="fa fa-arrow-up"></i> Sign up to get some yums</h3>
+			{{/if}}
+		</header>
+
+		{{#if currentUser}}
+			<ul class="yums">{{#each yums}}{{> yum}}{{/each}}</ul>
+		{{/if}}
+	</div>
+</body>

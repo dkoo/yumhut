@@ -1,0 +1,37 @@
+<template name="yum">
+	{{#if isOwner}}<li>
+		<form class="edit-yum {{#if editing}}visible{{/if}}">
+			<h1><input name="editname_{{id}}" type="text" placeholder="{{name}}"></h1>
+			<h2><input name="editaddress_{{id}}" type="text" placeholder="{{address}}"></h2>
+			{{#if countFavs}}
+				<ul class="favs">
+					{{#each showFavs}}
+						<li>{{this}} <a class="deletefav" href="#">&times;</a></li>
+					{{/each}}
+				</ul>
+			{{/if}}
+			<input class="addfav" name="fav_{{id}}" type="text" placeholder="Add a fav"> <button name="fav_{{id}}" class="addfav">&plus;</button>
+			<textarea name="editnotes_{{id}}" placeholder="{{notes}}"></textarea>
+			<button>save changes</button>
+			<button class="cancel">wait, no</button>
+		</form>
+		<div class="{{#if editing}}hidden{{/if}}">
+			<a href="#" class="delete" name="Delete this yum">&times;</a>
+			<h1>{{name}}</h1>
+			{{#if address}}<h2>{{address}}</h2>{{/if}}
+			{{#if countFavs}}
+				<ul class="favs">
+					{{#each showFavs}}
+						<li>{{this}}</li>
+					{{/each}}
+				</ul>
+			{{/if}}
+			{{#if notes}}<p>{{notes}}</p>{{/if}}
+			<a class="edit" href="#">edit</a>
+		</div>
+		{{#if deleting}}
+			{{> delete}}
+		{{/if}}
+	</li>
+	{{/if}}
+</template>
