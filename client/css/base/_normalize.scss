@@ -89,7 +89,7 @@ select {
     padding: 0.25em 0.5em;
     width: 100%;
     box-sizing: border-box;
-    border: 1px solid lightgray;
+    border: 1px solid $lightblue;
     border-radius: 2px;
     margin-bottom: 1em;
     padding: 0.5em;
@@ -97,7 +97,7 @@ select {
     transition: background-color $transition, border-color $transition;
     &:hover,
     &:focus {
-        border-color: gray;
+        border-color: $blue;
     }
 }
 

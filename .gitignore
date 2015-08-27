@@ -1,11 +1,11 @@
 # yumhut
 
 ## Google Places API (contains API key)
-client/js/compatibility/googlePlaces.js
+client/js/lib/googlePlaces.js
 
 ## Builds
 dist/
-private/build/
+tests/build/
 
 ## Node.js
 lib-cov
