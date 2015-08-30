@@ -21,19 +21,12 @@ h1 {
 .container {
 	box-sizing: border-box;
 	transition: transform 0.5s ease-in-out;
-	opacity: 0;
-	transform: translate3d(0, 20rem, 0);
 	height: 100%;
     &.adding,
     &.deleting {
         overflow: hidden;
         height: 100% !important;
     }
-	&.default,
-	&.home {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-	}
 	&.home {
 		padding: 1em;
 	}
@@ -41,8 +34,7 @@ h1 {
 	form {
 		text-align: center;
 		h1,
-		h2,
-		h3 {
+		h2 {
 			font-size: 1.25em;
 			line-height: 3rem;
 		}
