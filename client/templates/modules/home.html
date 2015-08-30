@@ -1,0 +1,24 @@
+<template name="home">
+
+	<header id="top" class="{{#if deleting}}background{{/if}}">
+		<nav></nav>
+		Hi there, {{> loginButtons}}
+	</header>
+
+	{{> add}}
+
+	<div class="container">
+		<header>
+			<h1>yumhut</h1>
+			{{> count}}
+
+			<button class="add {{#if adding}}{{else}}visible{{/if}}">add a yum</button>
+		</header>
+
+		<ul class="yums">
+			{{#each yums}}
+				{{> yum}}
+			{{/each}}
+		</ul>
+	</div>
+</template>

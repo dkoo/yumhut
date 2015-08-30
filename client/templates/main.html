@@ -1,0 +1,15 @@
+<head>
+	<title>yumhut</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+</head>
+
+<body>
+	{{#if loading}}
+		<div class="loading"></div>
+	{{/if}}
+	{{#if currentUser}}
+		{{> home}}
+	{{else}}
+		{{> accounts}}
+	{{/if}}
+</body>

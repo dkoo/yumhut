@@ -39,7 +39,9 @@ h1,
 h2,
 h3,
 h4 {
+    font-kerning: normal;
     font-size: inherit;
+    text-rendering: optimizeLegibility;
 }
 strong {
     font-weight: bold;
@@ -62,11 +64,15 @@ button {
     @include smallcaps(12px);
     font-weight: 700;
     text-align: center;
-    letter-spacing: inherit;
     cursor: pointer;
     color: white;
     &:hover {
         background-color: $blue;
+    }
+    &.full {
+        width: 100%;
+        font-size: 16px;
+        padding: 0.5em 1em;
     }
 }
 ::-moz-focus-inner {
