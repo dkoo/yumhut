@@ -1,5 +1,25 @@
 // server methods for account login/registration
 
+Meteor.startup(function() {
+	// set email environment credentials
+	process.env.MAIL_URL = 'smtp://no-reply%40yumhut.com:e^xQnekA@mail.yumhut.com:465';
+
+	Accounts.emailTemplates.siteName = 'Yumhut';
+	Accounts.emailTemplates.from = 'Yumhut <no-reply@yumhut.com>';
+	Accounts.emailTemplates.enrollAccount.subject = function (user) {
+		return 'Confirm your registration';
+	};
+	Accounts.emailTemplates.enrollAccount.text = function (user, url) {
+		return 'Thanks for joining Yumhut, ' + user.username + '! We’re excited to help you keep track of all your yums. To activate your account, click the link below:\n\n' + url;
+	};
+	Accounts.emailTemplates.resetPassword.subject = function (user) {
+		return 'Reset your Yumhut password';
+	};
+	Accounts.emailTemplates.resetPassword.text = function (user, url) {
+		return 'Hi, ' + user.username + '! We’re sending you this e-mail because we received a request to reset your password. If you don’t want to reset your password, just ignore this e-mail. Otherwise, click the link below to reset it:\n\n' + url;
+	};
+});
+
 Meteor.methods({
 	createNewUser: function(user) {
 		var validateUser = function(user) {
