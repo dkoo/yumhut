@@ -1,9 +1,28 @@
+Template.accounts.onRendered(function() {
+	// check if user is logged in, and stop loading animation on callback
+	Meteor.call('checkStatus', function(err, result) {
+		if ( err ) {
+			console.log(err);
+		} else {
+			console.log(result);
+		}
+		document.documentElement.classList.add('login');
+		Session.set('loading', false);
+	});
+});
+
 Template.accounts.helpers({
 	registering: function() {
-		return Session.get('registering');
+		var registering = Session.get('registering'),
+			activating = Session.get('activateToken');
+
+		return registering || activating ? true : false;
 	},
 	loggingin: function() {
-		return Session.get('loggingin');
+		var loggingIn = Session.get('loggingIn'),
+			resetting = Session.get('resetToken');
+
+		return loggingIn || resetting ? true : false;
 	}
 });
 
@@ -14,6 +33,6 @@ Template.accounts.events({
 	},
 	'click .login': function(e) {
 		e.preventDefault();
-		Session.set('loggingin', true);
+		Session.set('loggingIn', true);
 	}
 });

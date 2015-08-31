@@ -8,6 +8,7 @@ Meteor.subscribe('yums');
 Meteor.startup(function() {
 	Session.set('adding', false);
 	Session.set('deleting', false);
+	Session.set('loading', true);
 });
 
 // body helpers

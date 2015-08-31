@@ -1,7 +1,7 @@
 // small caps
 @mixin smallcaps($size) {
-    font-family: 'Lato', sans-serif;
+    font-family: $sans;
     font-size: $size;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.075em;
 }

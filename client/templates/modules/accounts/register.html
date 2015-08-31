@@ -1,14 +1,29 @@
 <template name="register">
-	<form id="register">
-		<h2>Sign up</h2>
+	{{#if activating}}
+		<form id="activate">
+			<h2>Activate your account</h2>
+			<p>You’re almost done! Choose a password to activate your account.</p>
 
-		<label>Your username</label>
-		<input type="text" name="user" required>
+			<label>Your password</label>
+			<input type="password" name="password" required>
 
-		<label>Your e-mail address</label>
-		<input type="email" name="email" required>
+			<label>Your password again</label>
+			<input type="password" name="confirm" required>
 
-		<button class="full signup">Sign up</button>
-		<button class="full back">Back</button>
-	</form>
+			<button class="full activate">Complete sign-up</button>
+		</form>
+	{{else}}
+		<form id="register">
+			<h2>Sign up</h2>
+
+			<label>Your username</label>
+			<input type="text" name="user" required>
+
+			<label>Your e-mail address</label>
+			<input type="email" name="email" required>
+
+			<button class="full signup">Sign up</button>
+			<button class="full back">Back</button>
+		</form>
+	{{/if}}
 </template>

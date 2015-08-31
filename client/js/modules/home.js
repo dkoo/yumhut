@@ -1,3 +1,7 @@
+Template.home.onRendered(function() {
+	Session.set('loading', false);
+});
+
 Template.home.helpers({
 	yums: function() {
 		if ( Session.get('filtered') ) {
@@ -47,5 +51,9 @@ Template.home.events({
 				address.value = place.vicinity;
 			}
 		});
+	},
+	'click .logout': function(e) {
+		e.preventDefault();
+		Meteor.logout();
 	}
 });
