@@ -1,5 +1,5 @@
 body {
-	background: $blue;
+	background: $green;
 	font-family: $sans;
 	color: white;
 	transition: background-color 1s ease-in-out;
@@ -21,51 +21,22 @@ h1 {
 .container {
 	box-sizing: border-box;
 	transition: transform 0.5s ease-in-out;
-	opacity: 0;
-	transform: translate3d(0, 20rem, 0);
 	height: 100%;
     &.adding,
     &.deleting {
         overflow: hidden;
         height: 100% !important;
     }
-	&.default,
 	&.home {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
 		padding: 1em;
 	}
-	&.default {
-		height: 100%;
-		max-width: 800px;
-		margin: auto;
-		overflow: auto;
-		text-align: center;
-		&::after,
-		header {
-			display: inline-block;
-			vertical-align: middle;
-		}
-		&::after {
-			content: '';
-			height: 100%;
-			margin-left: -0.25em;
-		}
-		header {
-			max-width: 99%;
-		}
-		p {
-			font-weight: 300;
-			font-size: 1.25em;
-		}
-	}
-	header {
+	header,
+	form {
 		text-align: center;
 		h1,
-		h2,
-		h3 {
+		h2 {
 			font-size: 1.25em;
-			line-height: 3rem;
+			line-height: 1.25em;
 		}
 		h1 {
 			font-size: 3em;

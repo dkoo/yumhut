@@ -1,0 +1,45 @@
+<template name="login">
+	{{#if resetting}}
+		<form id="reset">
+			<h2>Reset your password</h2>
+			<p>Enter a new password below to reset your account.</p>
+
+			<label>Your password</label>
+			<input type="password" name="password" required>
+
+			<label>Your password again</label>
+			<input type="password" name="confirm" required>
+
+			<button class="full activate">Reset password</button>
+		</form>
+	{{else}}
+		{{#if reset}}
+			<form id="start-reset">
+				<h2>Reset your password</h2>
+				<p>Forgot your password? No problem. Enter your account e-mail address and we’ll send you a link to create a new password.</p>
+
+				<label>Your e-mail address</label>
+				<input type="email" name="email" required>
+
+				<button class="full send-reset">Send recovery e-mail</button>
+				<button class="full cancel">Back to log-in</button>
+			</form>
+
+		{{else}}
+			<form id="login">
+				<h2>Log in</h2>
+
+				<label>Your username</label>
+				<input type="text" name="user" required>
+
+				<label>Your password</label>
+				<input type="password" name="password" required>
+
+				<button class="full signin">Log in</button>
+				<button class="full signup">Sign up</button>
+
+				<a href="#" class="reset">Forgot your password?</a>
+			</form>
+		{{/if}}
+	{{/if}}
+</template>

@@ -16,8 +16,7 @@ html {
 body {
     margin: 0;
     font: 16px/1 sans-serif;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
 }
 h1,
 h2,
@@ -39,7 +38,9 @@ h1,
 h2,
 h3,
 h4 {
+    font-kerning: normal;
     font-size: inherit;
+    text-rendering: optimizeLegibility;
 }
 strong {
     font-weight: bold;
@@ -60,13 +61,17 @@ button {
     border-radius: 4px;
     padding: 0.25em 1em;
     @include smallcaps(12px);
-    font-weight: 700;
+    font-weight: 400;
     text-align: center;
-    letter-spacing: inherit;
     cursor: pointer;
     color: white;
     &:hover {
         background-color: $blue;
+    }
+    &.full {
+        width: 100%;
+        font-size: 16px;
+        padding: 0.5em 1em;
     }
 }
 ::-moz-focus-inner {

@@ -1,0 +1,19 @@
+<template name="accounts">
+	<div class="container default">
+		<h1>yumhut</h1>
+		{{#if registering}}
+			{{> register}}
+		{{else}}
+			{{#if loggingin}}
+				{{> login}}
+			{{else}}
+				<form>
+					<h2>Where are the yums?</h2>
+					<p>Yumhut is a convenient place to house all the places that make you go “yum.” Add a yum, discover new yums, tag it with a location, and you’ll never forget where your favorite yums are again.</p>
+
+					<h3><a href="#" class="register">Sign up</a> or <a href="#" class="login">log in</a> to get some yums</h3>
+				</form>
+			{{/if}}
+		{{/if}}
+	</div>
+</template>
