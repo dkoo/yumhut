@@ -42,13 +42,12 @@ Meteor.methods({
 			},
 			valid = validateUser(user);
 
-			if ( valid === true ) {
-				var newUser = Accounts.createUser(user);
-				return Accounts.sendEnrollmentEmail(newUser);
-			} else {
-				return false;
-			}
-
-		// return Accounts.createUser(user);
+		if ( valid === true ) {
+			var newUser = Accounts.createUser(user);
+			return Accounts.sendEnrollmentEmail(newUser);
+		} else {
+			console.log(valid);
+			return false;
+		}
 	}
 });
