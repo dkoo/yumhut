@@ -18,6 +18,12 @@ h1 {
 	text-transform: uppercase;
 }
 
+#top {
+	nav {
+		float: right;
+	}
+}
+
 .container {
 	box-sizing: border-box;
 	transition: transform 0.5s ease-in-out;
@@ -32,18 +38,20 @@ h1 {
 	}
 	header,
 	form {
-		text-align: center;
 		h1,
 		h2 {
 			font-size: 1.25em;
 			line-height: 1.25em;
 		}
-		h1 {
-			font-size: 3em;
-		}
 		h2 {
 			font-size: 1.5em;
 			font-weight: 900;
+		}
+	}
+	header {
+		text-align: center;
+		h1 {
+			font-size: 3em;
 		}
 	}
 	&.home {

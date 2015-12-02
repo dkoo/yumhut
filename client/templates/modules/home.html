@@ -1,8 +1,9 @@
 <template name="home">
 
 	<header id="top" class="{{#if deleting}}background{{/if}}">
-		<nav></nav>
-		Hi there, <a href="#" class="logout">{{currentUser.username}}</a>
+		Hi there, {{currentUser.username}}!
+
+		<nav><a href="#" class="logout">Log out</a></nav>
 	</header>
 
 	{{> add}}
